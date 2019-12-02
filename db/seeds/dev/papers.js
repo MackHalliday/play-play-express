@@ -1,16 +1,16 @@
-exports.seed = function(knex, Promise) {
+exports.seed = function(knex) {
   // We must return a Promise from within our seed function
   // Without this initial `return` statement, the seed execution
   // will end before the asynchronous tasks have completed
-  return knex('papers').del() // delete all papers
+  return knex('favorites').del() // delete all favorites
 
     // Now that we have a clean slate, we can re-insert our paper data
     .then(() => {
       return Promise.all([
 
         // Insert a single paper, return the paper ID, insert 2 footnotes
-        knex('papers').insert({
-          title: 'Fooo', author: 'Bob', publisher: 'Minnesota'
+        knex('favorites').insert({
+          title: 'Bailamos', artistName: 'Enrique Iglesias', genre: 'Pop', rating: 88
         }, 'id')
         .then(() => console.log('Seeding complete!'))
         .catch(error => console.log(`Error seeding data: ${error}`))
