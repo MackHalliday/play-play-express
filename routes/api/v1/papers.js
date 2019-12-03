@@ -6,7 +6,6 @@ const configuration = require('../../../knexfile')[environment];
 const database = require('knex')(configuration);
 
 const MusixMatchService = require('../../../services/musix_match_service.js');
-
 const musixMatchService = new MusixMatchService();
 
 router.get('/', async function (request, response) {
