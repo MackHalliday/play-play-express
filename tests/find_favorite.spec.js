@@ -41,12 +41,20 @@ describe('test favorites path', () => {
       expect(response.body[0].rating).toBe(52);
     });
 
-    it('sad path', async () => {
+    it('sad path record not found', async () => {
       const response = await request(app)
-        .get("/api/v1/favorites/10");
+        .get("/api/v1/favorites/1000");
 
       expect(response.statusCode).toBe(404);
       expect(response.body.error).toBe('Record not found');
+    });
+
+    it('sad path bad request', async () => {
+      const response = await request(app)
+        .get("/api/v1/favorites/chicken");
+
+      expect(response.statusCode).toBe(500);
+      expect(response.body.error).toBe('Unable to handle request');
     });
   });
 });
