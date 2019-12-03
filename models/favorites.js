@@ -17,6 +17,10 @@ class Favorites {
       .where('id', favoriteId)
       .columns('id', 'title', 'artistName', 'genre', 'rating');
   }
+
+  async deleteFavorite(songID) {
+    return database('favorites').where('id', songID).del()
+  }
 }
 
 module.exports = Favorites
