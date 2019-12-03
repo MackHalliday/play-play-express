@@ -41,34 +41,4 @@ describe('test favorites path', () => {
       expect(response.body[0].rating).toBe(52);
     });
   });
-
-  describe('test favorite DELETE', () => {
-    it('happy path', async () => {
-      const response = await request(app)
-        .delete("/api/v1/favorites/2");
-
-      expect(response.statusCode).toBe(204);
-    });
-
-    it('sad path', async () => {
-      const response = await request(app)
-        .delete("/api/v1/favorites/2");
-
-      expect(response.statusCode).toBe(204);
-
-      const response2 = await request(app)
-        .delete("/api/v1/favorites/2");
-
-      expect(response2.statusCode).toBe(404);
-
-      expect(response2.body).toStrictEqual({"error": "Record not found"});
-
-      const response3 = await request(app)
-        .delete("/api/v1/favorites/chicken");
-
-      expect(response3.statusCode).toBe(500);
-
-      expect(response3.body).toStrictEqual({"error": "Request could not be handled"});
-    });
-  });
 });
