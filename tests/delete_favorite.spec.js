@@ -22,23 +22,33 @@ describe('test favorites path', () => {
     database.raw('truncate table favorites cascade');
   });
 
-  describe('test favorites GET', () => {
+  describe('test favorite DELETE', () => {
     it('happy path', async () => {
       const response = await request(app)
-        .get("/api/v1/favorites");
+        .delete("/api/v1/favorites/2");
 
-      expect(response.statusCode).toBe(200);
-      expect(response.body.length).toBe(4);
+      expect(response.statusCode).toBe(204);
+    });
 
-      expect(response.body[0]).toHaveProperty('title');
-      expect(response.body[0]).toHaveProperty('artistName');
-      expect(response.body[0]).toHaveProperty('genre');
-      expect(response.body[0]).toHaveProperty('rating');
+    it('sad path', async () => {
+      const response = await request(app)
+        .delete("/api/v1/favorites/2");
 
-      expect(response.body[0].title).toBe('The Chain');
-      expect(response.body[0].artistName).toBe('Fleetwood Mac');
-      expect(response.body[0].genre).toBe('Rock');
-      expect(response.body[0].rating).toBe(52);
+      expect(response.statusCode).toBe(204);
+
+      const response2 = await request(app)
+        .delete("/api/v1/favorites/2");
+
+      expect(response2.statusCode).toBe(404);
+
+      expect(response2.body).toStrictEqual({"error": "Record not found"});
+
+      const response3 = await request(app)
+        .delete("/api/v1/favorites/chicken");
+
+      expect(response3.statusCode).toBe(500);
+
+      expect(response3.body).toStrictEqual({"error": "Request could not be handled"});
     });
   });
 });
