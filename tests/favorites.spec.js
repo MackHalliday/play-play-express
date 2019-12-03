@@ -11,10 +11,10 @@ describe('test favorites path', () => {
     await database.raw('truncate table favorites cascade');
 
     await database('favorites').insert([
-      {title: 'The Chain', artistName: 'Fleetwood Mac', genre: 'Rock', rating: 52},
-      {title: 'Truth Hurts', artistName: 'Lizzo', genre: 'Pop', rating: 40},
-      {title: 'Baby One More Time', artistName: 'Britney Spears', genre: 'Pop', rating: 91},
-      {title: 'Toxic', artistName: 'Britney Spears', genre: 'Pop', rating: 68}
+      {title: 'The Chain', artistName: 'Fleetwood Mac', genre: 'Rock', rating: 52, id: 1},
+      {title: 'Truth Hurts', artistName: 'Lizzo', genre: 'Pop', rating: 40, id: 2},
+      {title: 'Baby One More Time', artistName: 'Britney Spears', genre: 'Pop', rating: 91, id: 3},
+      {title: 'Toxic', artistName: 'Britney Spears', genre: 'Pop', rating: 68, id: 4}
     ]);
   });
 
@@ -39,6 +39,36 @@ describe('test favorites path', () => {
       expect(response.body[0].artistName).toBe('Fleetwood Mac');
       expect(response.body[0].genre).toBe('Rock');
       expect(response.body[0].rating).toBe(52);
+    });
+  });
+
+  describe('test favorite DELETE', () => {
+    it('happy path', async () => {
+      const response = await request(app)
+        .delete("/api/v1/favorites/2");
+
+      expect(response.statusCode).toBe(204);
+    });
+
+    it('sad path', async () => {
+      const response = await request(app)
+        .delete("/api/v1/favorites/2");
+
+      expect(response.statusCode).toBe(204);
+
+      const response2 = await request(app)
+        .delete("/api/v1/favorites/2");
+
+      expect(response2.statusCode).toBe(404);
+
+      expect(response2.body).toStrictEqual({"error": "Record not found"});
+
+      const response3 = await request(app)
+        .delete("/api/v1/favorites/chicken");
+
+      expect(response3.statusCode).toBe(500);
+
+      expect(response3.body).toStrictEqual({"error": "Request could not be handled"});
     });
   });
 });
