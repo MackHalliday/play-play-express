@@ -5,11 +5,17 @@ const database = require('knex')(configuration);
 class Favorites {
   constructor(){
   }
-  
+
   async allFavorites() {
     return database('favorites')
       .columns('id', 'title', 'artistName', 'genre', 'rating')
-      .select()
+      .select();
+  }
+
+  async findFavorite(favoriteId) {
+    return database('favorites')
+      .where('id', favoriteId)
+      .columns('id', 'title', 'artistName', 'genre', 'rating');
   }
 }
 
