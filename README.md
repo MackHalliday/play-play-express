@@ -128,9 +128,12 @@ Include what the endpoint does
    *  [Node-Fetch](https://www.npmjs.com/package/node-fetch)
 
   ## Core Contributors
+  
+   #### [Joshua Sherwood](https://github.com/joshsherwood1)
+  ##### [View LinkedIn](https://www.linkedin.com/in/sherwoodjosh/)
+  
 
   #### [Mack Halliday](https://github.com/MackHalliday)
   ##### [View LinkedIn](https://www.linkedin.com/in/mackhalliday/)
   
-  #### [Joshua Sherwood](https://github.com/joshsherwood1)
-  ##### [View LinkedIn](https://www.linkedin.com/in/sherwoodjosh/)
+ 
