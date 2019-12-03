@@ -5,8 +5,13 @@ const Favorites = require('../../../models/favorites.js');
 const favorites = new Favorites();
 
 router.get('/', async function (request, response) {
-  let data = await favorites.allFavorites();
-  return response.status(200).json(data);
+ favorites.allFavorites()
+  .then((data) => {
+     response.status(200).json(data);
+   })
+   .catch((error) => {
+     return response.status(500).json({ error });
+   });
 });
 
 module.exports = router;
