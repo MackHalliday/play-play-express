@@ -44,7 +44,7 @@ router.delete('/:id', async function (request, response) {
     }
   }
   catch(error) {
-    return response.status(500).json({ error });
+    return response.status(500).json({"error": "Request could not be handled"});
   }
 });
 
