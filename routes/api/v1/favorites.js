@@ -14,4 +14,21 @@ router.get('/', async function (request, response) {
    });
 });
 
+router.get('/:id', async function (request, response) {
+
+  try {
+    let favoriteId = await request.params.id
+    let data = await favorites.findFavorite(favoriteId)
+    
+    if (data.length != 0){
+      return response.status(200).json(data);
+    } else {
+      return response.status(404).json({"error": "Record not found"});
+    }
+  }
+  catch(error) {
+    return response.status(500).json({ error });
+  }
+});
+
 module.exports = router;
