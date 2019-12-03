@@ -15,11 +15,10 @@ router.get('/', async function (request, response) {
 });
 
 router.get('/:id', async function (request, response) {
-
   try {
     let favoriteId = await request.params.id
     let data = await favorites.findFavorite(favoriteId)
-    
+
     if (data.length != 0){
       return response.status(200).json(data);
     } else {
