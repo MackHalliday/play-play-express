@@ -10,8 +10,8 @@ describe('test favorites path', () => {
   beforeEach(async () => {
     await database.raw('truncate table favorites cascade');
 
-    database('favorites').insert([
-      {title: 'Fleetwood Mac', artistName: 'Fleetwood Mac', genre: 'Rock', rating: 52},
+    await database('favorites').insert([
+      {title: 'The Chain', artistName: 'Fleetwood Mac', genre: 'Rock', rating: 52},
       {title: 'Truth Hurts', artistName: 'Lizzo', genre: 'Pop', rating: 40},
       {title: 'Baby One More Time', artistName: 'Britney Spears', genre: 'Pop', rating: 91},
       {title: 'Toxic', artistName: 'Britney Spears', genre: 'Pop', rating: 68}
@@ -28,14 +28,14 @@ describe('test favorites path', () => {
         .get("/api/v1/favorites");
 
       expect(response.statusCode).toBe(200);
-      expect(response.body.length).toBe(5);
+      expect(response.body.length).toBe(4);
 
       expect(response.body[0]).toHaveProperty('title');
       expect(response.body[0]).toHaveProperty('artistName');
       expect(response.body[0]).toHaveProperty('genre');
       expect(response.body[0]).toHaveProperty('rating');
 
-      expect(response.body[0].title).toBe('Bailamos');
+      expect(response.body[0].title).toBe('The Chain');
       expect(response.body[0].artistName).toBe('Fleetwood Mac');
       expect(response.body[0].genre).toBe('Rock');
       expect(response.body[0].rating).toBe(52);
