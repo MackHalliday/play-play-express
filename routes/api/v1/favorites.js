@@ -15,7 +15,6 @@ router.get('/', async function (request, response) {
 });
 
 router.get('/:id', async function (request, response) {
-
   try {
     let favoriteId = await request.params.id
     let data = await favorites.findFavorite(favoriteId)
@@ -27,7 +26,7 @@ router.get('/:id', async function (request, response) {
     }
   }
   catch(error) {
-    return response.status(500).json({ error });
+    return response.status(500).json({ "error": "Unable to handle request" });
   }
 });
 
