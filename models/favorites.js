@@ -5,9 +5,11 @@ const database = require('knex')(configuration);
 class Favorites {
   constructor(){
   }
-  
+
   async allFavorites() {
-    return database('favorites').select()
+    return database('favorites')
+      .columns('id', 'title', 'artistName', 'genre', 'rating')
+      .select()
   }
 }
 
