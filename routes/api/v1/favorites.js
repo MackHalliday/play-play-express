@@ -4,6 +4,9 @@ var router = express.Router();
 const Favorites = require('../../../models/favorites.js');
 const favorites = new Favorites();
 
+const FavoritesPresenter = require('../../../presenters/favorites_presenter.js');
+const favoritesPresenter = new FavoritesPresenter();
+
 router.get('/', async function (request, response) {
  favorites.allFavorites()
   .then((data) => {
@@ -46,5 +49,21 @@ router.delete('/:id', async function (request, response) {
     return response.status(500).json({"error": "Request could not be handled"});
   }
 });
+
+router.post('/', async function (request, response) {
+  try {
+    let body = await request.body
+    let data = await favoritesPresenter.newFavorite(body)
+    if (data == undefined) {
+      return response.status(400).json({"message": "Song does not exist"});
+    } else {
+      return response.status(201).json(data);
+    }
+  }
+  catch(error) {
+    return response.status(500).json({"error": "Request could not be handled"});
+  }
+});
+
 
 module.exports = router;
