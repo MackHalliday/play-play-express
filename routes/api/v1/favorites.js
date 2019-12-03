@@ -26,7 +26,7 @@ router.get('/:id', async function (request, response) {
     }
   }
   catch(error) {
-    return response.status(500).json({ error });
+    return response.status(500).json({ "error": "Unable to handle request" });
   }
 });
 
