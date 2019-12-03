@@ -9,9 +9,7 @@ exports.seed = function(knex) {
       return Promise.all([
 
         // Insert a single paper, return the paper ID, insert 2 footnotes
-        knex('favorites').insert({
-          title: 'Bailamos', artistName: 'Enrique Iglesias', genre: 'Pop', rating: 88
-        }, 'id')
+        knex('favorites').insert([{title: 'Bailamos', artistName: 'Enrique Iglesias', genre: 'Pop', rating: 88}, {title: 'Oops I Did It Again', artistName: 'Britney Spears', genre: 'Pop', rating: 79}])
         .then(() => console.log('Seeding complete!'))
         .catch(error => console.log(`Error seeding data: ${error}`))
       ]) // end return Promise.all
