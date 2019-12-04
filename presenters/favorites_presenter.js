@@ -7,6 +7,7 @@ const musixMatchService = new MusixMatchService();
 
 const Favorites = require('../models/favorites.js');
 const favorites = new Favorites();
+
 const Track = require('../models/track.js');
 
 
@@ -17,7 +18,6 @@ class FavoritesPresenter {
   }
 
   async newFavorite(body) {
-    
     let matchedTracks = await musixMatchService.getTrackSearch(body.title, body.artist);
     let newTrack = await this.firstTrack(matchedTracks);
 
