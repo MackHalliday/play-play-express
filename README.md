@@ -130,10 +130,10 @@ Include what the endpoint does
   ## Core Contributors
   
    #### [Joshua Sherwood](https://github.com/joshsherwood1)
-  ##### [View LinkedIn](https://www.linkedin.com/in/sherwoodjosh/)
+   **[View LinkedIn](https://www.linkedin.com/in/sherwoodjosh/)**
   
 
   #### [Mack Halliday](https://github.com/MackHalliday)
-  ##### [View LinkedIn](https://www.linkedin.com/in/mackhalliday/)
+   **[View LinkedIn](https://www.linkedin.com/in/mackhalliday/)**
   
  
