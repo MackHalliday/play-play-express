@@ -11,10 +11,10 @@ describe('test favorites path', () => {
     await database.raw('truncate table favorites cascade');
 
     await database('favorites').insert([
-      {title: 'The Chain', artistName: 'Fleetwood Mac', genre: 'Rock', rating: 52},
-      {title: 'Truth Hurts', artistName: 'Lizzo', genre: 'Pop', rating: 40},
-      {title: 'Baby One More Time', artistName: 'Britney Spears', genre: 'Pop', rating: 91},
-      {title: 'Toxic', artistName: 'Britney Spears', genre: 'Pop', rating: 68}
+      {title: 'The Chain', artistName: 'Fleetwood Mac', genre: 'Rock', rating: 52, id: 1},
+      {title: 'Truth Hurts', artistName: 'Lizzo', genre: 'Pop', rating: 40, id: 2},
+      {title: 'Baby One More Time', artistName: 'Britney Spears', genre: 'Pop', rating: 91, id: 3},
+      {title: 'Toxic', artistName: 'Britney Spears', genre: 'Pop', rating: 68, id: 4}
     ]);
   });
 
