@@ -6,6 +6,7 @@ const environment = process.env.NODE_ENV || 'test';
 const configuration = require('../knexfile')[environment];
 const database = require('knex')(configuration);
 
+
 describe('test favorites POST', () => {
   beforeEach(async () => {
     await database.raw('truncate table favorites cascade');
