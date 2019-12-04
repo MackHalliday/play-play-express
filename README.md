@@ -9,7 +9,7 @@
  *  [Initial Setup](https://github.com/MackHalliday/play-play-express#intial-setup)
  *  [How to Run Tests](https://github.com/MackHalliday/play-play-express#how-to-run-tests)
  *  [How to Use](https://github.com/MackHalliday/play-play-express#how-to-use)
-    * [Endpoints](https://github.com/MackHalliday/play-play-express/blob/master/README.md#endpoints)
+ *  [Endpoints](https://github.com/MackHalliday/play-play-express/blob/master/README.md#endpoints)
  *  [Schema Design](https://github.com/MackHalliday/play-play-express#schema-design)
  *  [Tech Stack List](https://github.com/MackHalliday/play-play-express#tech-stack-list)
  *  [Core Contributors](https://github.com/MackHalliday/play-play-express#core-contributors)
@@ -87,9 +87,9 @@ knex migrate:latest --env test
 
  Recommend using [Postman](https://www.getpostman.com/) to hit endpoints.
 
- ### Endpoints
+ ## Endpoints
 
- #### Root
+ ### Root
 
 Production address
 
@@ -99,7 +99,7 @@ Local address
 
 ``` http://localhost:3000/ ```
 
-#### Get All Favorite Tracks
+### Get All Favorite Tracks
 Returns all favorite tracks from the database 
 
 ``` GET /api/v1/favorites ```
@@ -110,7 +110,7 @@ If successful, application will respond with status code 200 and JSON with array
 
 
 
-#### Get a Single Favorite Track
+### Get a Single Favorite Track
 Returns a single favorite track from the database
 
 ``` GET /api/v1/favorites/:id ```
@@ -123,7 +123,7 @@ If successful, application will respond with status code 200 and JSON of request
 
 
 
-#### Delete a Single Favorite Track
+### Delete a Single Favorite Track
 Delete a single favorite track from the database
 
 ``` DELETE /api/v1/favorites/:id ```
@@ -134,7 +134,7 @@ If successful, application will respond with 201 status.
 
 
 
-#### Add a New Single Favorite Track
+### Add a New Single Favorite Track
 Add a new favorite track. The track title must be included in the POST request body. Including the track's artist is optional.
 
 ``` POST /api/v1/favorites ```
