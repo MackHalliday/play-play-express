@@ -16,7 +16,7 @@
 
 ## Introduction
 
-* [Project Requirements]()
+* [Project Requirements](https://backend.turing.io/module4/projects/play/play_rubric)
 
 * [GitHub Project Board](https://github.com/MackHalliday/play-play-express/projects/1)
 
@@ -54,14 +54,14 @@ knex seed:run
 #### Adding Environment Keys
 Enviroment keys are required to use the Google Geocoding and DarkSky Service.
 
-Obtain a [Musix Match API key]()
+Obtain a [Musix Match API key](https://developer.musixmatch.com/)
 
 Create an `.env` file in the root of the dictory
 
 In the `.env` file, add the following information:
 
 ```
-MUSIX_MATCH_API_KEY= your_google_api_key
+MUSIX_MATCH_API_KEY= your_musix_match_api_key
 ```
 
 Add the `.env` to your .gitignore to avoid the file being pushed to GitHub
@@ -85,9 +85,7 @@ knex migrate:latest --env test
 
  ## How to Use
 
- Recommend using [Postman](https://www.getpostman.com/) to hit endpoints. All endpoint begin with the root address and require a valid `api_key` in the body.
-
- There are three valid api_key seeded in the database: `123`, `456`, and `789`.
+ Recommend using [Postman](https://www.getpostman.com/) to hit endpoints.
 
  ### Endpoints
 
@@ -101,20 +99,43 @@ Local address
 
 ``` http://localhost:3000/ ```
 
-#### Example Endpoint
-Include what the endpoint does
+#### Get All Favorite Tracks
+Returns all favorite tracks from the database 
 
-``` GET /api/v1/example_point```
+``` GET /api/v1/favorites ```
 
- ``` body:
-   {
-     "api_key": "YOUR_API_KEY"
-   }
-```
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/6606e9d1f575ad52eb26)
 
-```params_varible```: what varible does
 
-[![Run in Postman]()
+#### Get a Single Favorite Track
+Returns a single favorite track from the database
+
+``` GET /api/v1/favorites/:id ```
+
+`:id`: id of desired favorite track
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a375cfdc39665aae1257)
+
+
+#### Delete a Single Favorite Track
+Delete a single favorite track from the database
+
+``` DELETE /api/v1/favorites/:id ```
+
+`:id`: id of the track to be deleted
+
+If sucessful, application will respond with 201 status.
+
+
+#### Add a New Single Favorite Track
+Add a new favorite track. The track title must be included in the POST request body. Including the track's artist is optional.
+
+``` POST /api/v1/favorites ```
+
+`title`: title of the desired track
+`artist`: (optional) artist of the desired track
+
+If sucessful, application will respond with 201 status.
 
 
  ## Schema Design
