@@ -8,19 +8,19 @@ const database = require('knex')(configuration);
 
 
 describe('test favorites POST', () => {
-  beforeEach(async () => {
-    await database.raw('truncate table favorites cascade');
-    await database('favorites').insert([
-      {id: 1, title: 'The Chain', artistName: 'Fleetwood Mac', genre: 'Rock', rating: 52},
-      {id: 2, title: 'Truth Hurts', artistName: 'Lizzo', genre: 'Pop', rating: 40},
-      {id: 3, title: 'Baby One More Time', artistName: 'Britney Spears', genre: 'Pop', rating: 91},
-      {id: 4, title: 'Toxic', artistName: 'Britney Spears', genre: 'Pop', rating: 68}
-    ]);
-  })
-
-  afterEach(() => {
-    database.raw('truncate table favorites cascade');
-  })
+  // beforeEach(async () => {
+  //   await database.raw('truncate table favorites cascade');
+  //   await database('favorites').insert([
+  //     {id: 1, title: 'The Chain', artistName: 'Fleetwood Mac', genre: 'Rock', rating: 52},
+  //     {id: 2, title: 'Truth Hurts', artistName: 'Lizzo', genre: 'Pop', rating: 40},
+  //     {id: 3, title: 'Baby One More Time', artistName: 'Britney Spears', genre: 'Pop', rating: 91},
+  //     {id: 4, title: 'Toxic', artistName: 'Britney Spears', genre: 'Pop', rating: 68}
+  //   ]);
+  // })
+  //
+  // afterEach(() => {
+  //   database.raw('truncate table favorites cascade');
+  // })
 
   it('happy path', async () => {
     const body = {
@@ -95,4 +95,3 @@ describe('test favorites POST', () => {
     expect(response.body.error).toBe('You must include a title parameter in the request');
   });
 });
-// });
