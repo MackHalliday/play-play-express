@@ -1,8 +1,10 @@
 
 
 # Play Play
+[![Travis CI Build](www.example.com)](https://api.travis-ci.org/MackHalliday/play-play-express.svg?branch=master)
 
 #### [Visit Production Application](https://play-play-express.herokuapp.com/)
+
 
 ## Table of Contents
  *  [Introduction](https://github.com/MackHalliday/play-play-express#introduction)
