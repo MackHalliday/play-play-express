@@ -104,7 +104,10 @@ Returns all favorite tracks from the database
 
 ``` GET /api/v1/favorites ```
 
+If successful, application will respond with status code 200 and JSON with array of tracks.
+
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/6606e9d1f575ad52eb26)
+
 
 
 #### Get a Single Favorite Track
@@ -114,7 +117,10 @@ Returns a single favorite track from the database
 
 `:id`: id of desired favorite track
 
+If successful, application will respond with status code 200 and JSON of requested track.
+
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a375cfdc39665aae1257)
+
 
 
 #### Delete a Single Favorite Track
@@ -124,7 +130,8 @@ Delete a single favorite track from the database
 
 `:id`: id of the track to be deleted
 
-If sucessful, application will respond with 201 status.
+If successful, application will respond with 201 status.
+
 
 
 #### Add a New Single Favorite Track
@@ -135,12 +142,14 @@ Add a new favorite track. The track title must be included in the POST request b
 `title`: title of the desired track
 `artist`: (optional) artist of the desired track
 
-If sucessful, application will respond with 201 status.
+If successful, application will respond with 201 status and return JSON of newly posted record.
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a375cfdc39665aae1257)
+
 
 
  ## Schema Design
  
- Include scheme design
 
  ## Tech Stack List
    *  [Node.js](https://nodejs.org/en/)
