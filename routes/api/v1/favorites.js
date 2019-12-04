@@ -52,9 +52,13 @@ router.delete('/:id', async function (request, response) {
 
 router.post('/', async function (request, response) {
   try {
+    
+    if (!('title' in request.body)) {
+      return response.status(404).json({"error": "You must include a title parameter in the request"});
+    }
     let data = await favoritesPresenter.newFavorite(request.body)
     if (data == undefined) {
-      return response.status(400).json({"message": "Song does not exist"});
+      return response.status(400).json({"error": "Record not created. Song with that title could not be found"});
     } else {
       return response.status(201).json(data);
     }
