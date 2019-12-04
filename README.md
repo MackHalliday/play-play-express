@@ -18,7 +18,7 @@
 
 * [Project Requirements]()
 
-* [GitHub Project Board]()
+* [GitHub Project Board](https://github.com/MackHalliday/play-play-express/projects/1)
 
 
  ## Intial Setup
