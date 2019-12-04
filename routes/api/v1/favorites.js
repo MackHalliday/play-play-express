@@ -4,6 +4,9 @@ var router = express.Router();
 const Favorites = require('../../../models/favorites.js');
 const favorites = new Favorites();
 
+const FavoritesPresenter = require('../../../presenters/favorites_presenter.js');
+const favoritesPresenter = new FavoritesPresenter();
+
 router.get('/', async function (request, response) {
  favorites.allFavorites()
   .then((data) => {
@@ -46,5 +49,24 @@ router.delete('/:id', async function (request, response) {
     return response.status(500).json({"error": "Request could not be handled"});
   }
 });
+
+router.post('/', async function (request, response) {
+  try {
+    
+    if (!('title' in request.body)) {
+      return response.status(404).json({"error": "You must include a title parameter in the request"});
+    }
+    let data = await favoritesPresenter.newFavorite(request.body)
+    if (data == undefined) {
+      return response.status(400).json({"error": "Record not created. Song with that title could not be found"});
+    } else {
+      return response.status(201).json(data);
+    }
+  }
+  catch(error) {
+    return response.status(500).json({"error": "Request could not be handled"});
+  }
+});
+
 
 module.exports = router;
