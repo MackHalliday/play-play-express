@@ -52,8 +52,7 @@ router.delete('/:id', async function (request, response) {
 
 router.post('/', async function (request, response) {
   try {
-    let body = await request.body
-    let data = await favoritesPresenter.newFavorite(body)
+    let data = await favoritesPresenter.newFavorite(request.body)
     if (data == undefined) {
       return response.status(400).json({"message": "Song does not exist"});
     } else {
