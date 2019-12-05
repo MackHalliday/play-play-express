@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-const Playlists = require('../../../models/playlists.js');
-const playlists = new Playlists();
+// const Playlists = require('../../../models/playlists.js');
+// const playlists = new Playlists();
 
 // const FavoritesPresenter = require('../../../presenters/favorites_presenter.js');
 // const favoritesPresenter = new FavoritesPresenter();
