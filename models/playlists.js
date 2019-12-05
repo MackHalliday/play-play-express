@@ -6,11 +6,10 @@ class Playlists {
   // constructor(){
   // }
 
-//   async allFavorites() {
-//     return database('favorites')
-//       .columns('id', 'title', 'artistName', 'genre', 'rating')
-//       .select();
-//   }
+  async allPlaylists() {
+    return database('playlists')
+      .select();
+  }
 //
 //   async findFavorite(favoriteId) {
 //     return database('favorites')
