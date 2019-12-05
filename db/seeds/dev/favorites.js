@@ -10,6 +10,15 @@ exports.seed = function(knex) {
           {title: 'Toxic', artistName: 'Britney Spears', genre: 'Pop', rating: 68}
         ])
         .then(() => console.log('Seeding complete!'))
+        .catch(error => console.log(`Error seeding data: ${error}`)),
+
+        knex('playlists').insert([
+          {title: '90s Guilty Pleasure'},
+          {title: 'Party Mix'},
+          {title: 'Christmas Playlist'},
+          {title: 'Top 100 Songs'}
+        ])
+        .then(() => console.log('Seeding complete!'))
         .catch(error => console.log(`Error seeding data: ${error}`))
       ])
     })
