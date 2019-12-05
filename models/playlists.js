@@ -3,23 +3,22 @@ const configuration = require('../knexfile')[environment];
 const database = require('knex')(configuration);
 
 class Playlists {
-  // constructor(){
-  // }
+  constructor(){
+  }
 
   async allPlaylists() {
     return database('playlists')
       .select();
   }
 //
-//   async findFavorite(favoriteId) {
-//     return database('favorites')
-//       .where('id', favoriteId)
-//       .columns('id', 'title', 'artistName', 'genre', 'rating');
-//   }
+  async findPlaylist(playlistId) {
+    return database('playlists')
+      .where('id', playlistId);
+  }
 //
-//   async deleteFavorite(songID) {
-//     return database('favorites').where('id', songID).del()
-//   }
+  async deletePlaylist(playlistId) {
+    return database('playlists').where('id', playlistId).del()
+  }
 //
 //   async createFavorite(trackObject){
 //    return database('favorites')
