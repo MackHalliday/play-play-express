@@ -1,21 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
-// const Playlists = require('../../../models/playlists.js');
-// const playlists = new Playlists();
+const Playlists = require('../../../models/playlists.js');
+const playlists = new Playlists();
 
 // const FavoritesPresenter = require('../../../presenters/favorites_presenter.js');
 // const favoritesPresenter = new FavoritesPresenter();
 
-// router.get('/', async function (request, response) {
-//  favorites.allFavorites()
-//   .then((data) => {
-//      response.status(200).json(data);
-//    })
-//    .catch((error) => {
-//      return response.status(500).json({ error });
-//    });
-// });
+router.get('/', async function (request, response) {
+ playlists.allPlaylists()
+  .then((data) => {
+     response.status(200).json(data);
+   })
+   .catch((error) => {
+     return response.status(500).json({ error });
+   });
+});
 //
 // router.get('/:id', async function (request, response) {
 //   try {
