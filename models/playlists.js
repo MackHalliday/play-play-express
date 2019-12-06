@@ -20,16 +20,13 @@ class Playlists {
     return database('playlists').where('id', playlistId).del()
   }
 //
-//   async createFavorite(trackObject){
-//    return database('favorites')
-//         .insert({
-//                 title: trackObject.title,
-//                 artistName: trackObject.artistName,
-//                 genre: trackObject.genre,
-//                 rating: trackObject.rating
-//                 })
-//         .returning(['id', 'title', 'artistName', 'genre', 'rating']);
-//   }
+  async createPlaylist(title){
+   return database('playlists')
+        .insert({
+                title: title,
+                })
+        .returning(['id', 'title', 'created_at', 'updated_at']);
+  }
 }
 
 module.exports = Playlists
