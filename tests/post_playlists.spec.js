@@ -11,7 +11,7 @@ describe('test playlists POST', () => {
 
   it('user can create a playlist', async () => {
     let body = {
-      title: "Punk Rock Playlist"
+      title: "Chicken Dance Party"
     };
     let response = await request(app)
       .post("/api/v1/playlists")
@@ -24,24 +24,24 @@ describe('test playlists POST', () => {
     expect(response.body[0]).toHaveProperty('created_at');
     expect(response.body[0]).toHaveProperty('updated_at');
 
-    expect(response.body[0].title).toBe('Punk Rock Playlist');
+    expect(response.body[0].title).toBe('Chicken Dance Party');
 
     let lastCreatedPlaylist = await database('playlists').orderBy('created_at', 'desc').first()
 
-    expect(lastCreatedPlaylist.title).toBe('Punk Rock Playlist');
+    expect(lastCreatedPlaylist.title).toBe('Chicken Dance Party');
 
   });
 
   it('user cannot create playlist with the same title', async () => {
     let body = {
-      title: "Punk Rock Playlist"
+      title: "Chicken Dance Party"
     };
     await request(app)
       .post("/api/v1/playlists")
       .send(body);
 
       let body2 = {
-        title: "Punk Rock Playlist"
+        title: "Chicken Dance Party"
       };
       let response = await request(app)
         .post("/api/v1/playlists")
