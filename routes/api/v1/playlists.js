@@ -18,13 +18,12 @@ router.get('/', async function (request, response) {
 });
 //
 router.put('/:id', async function (request, response) {
-    let playlistId = await request.params.id
-    let title = await request.body.title
-    console.log(playlistId, title)
+  let playlistId = await request.params.id
+  let title = await request.body.title
 
-  let object = playlists.findPlaylist(playlistId)
+  let object = await playlists.findPlaylist(playlistId)
 
-  if (object.length != 0) {
+  if (object.length == 0) {
     return response.status(400).json({"error": "Please enter a valid id"});
   }
 
@@ -43,7 +42,6 @@ router.put('/:id', async function (request, response) {
       return response.status(400).json({"error": "Please enter a unique title"});
     }
   }
-
   catch(error) {
     return response.status(500).json({"error": "Request could not be handled"});
   }
