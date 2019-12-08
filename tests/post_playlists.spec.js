@@ -8,7 +8,13 @@ const database = require('knex')(configuration);
 
 
 describe('test playlists POST', () => {
+  beforeEach(async () => {
+    await database.raw('truncate table playlists cascade');
+  });
 
+  afterEach(() => {
+    database.raw('truncate table playlists cascade');
+  });
   it('user can create a playlist', async () => {
     let body = {
       title: "Chicken Dance Party"
