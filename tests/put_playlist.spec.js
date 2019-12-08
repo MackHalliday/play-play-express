@@ -6,7 +6,6 @@ const environment = process.env.NODE_ENV || 'test';
 const configuration = require('../knexfile')[environment];
 const database = require('knex')(configuration);
 
-
 describe('test playlists PUT', () => {
   beforeEach(async () => {
     await database.raw('truncate table playlists cascade');
@@ -24,7 +23,6 @@ describe('test playlists PUT', () => {
   });
 
   it('user can update a playlist', async () => {
-    console.log(database('playlists').where({ id: 1}).select())
     let body = {
       title: "Punk Rock Playlist"
     };
@@ -38,12 +36,10 @@ describe('test playlists PUT', () => {
     expect(response.body[0]).toHaveProperty('created_at');
     expect(response.body[0]).toHaveProperty('updated_at');
 
-    expect(response.body[0].title).toBe('Punk Rock Playlist');
+    expect(response.body[0].title).toEqual('Punk Rock Playlist');
 
     let playlist = await database('playlists').where({ id: 1})
-
-    expect(playlist.title).toBe('Punk Rock Playlist');
-
+    expect(playlist[0].title).toEqual('Punk Rock Playlist');
   });
 
   it('user cannot update playlist with the same title', async () => {
@@ -61,8 +57,8 @@ describe('test playlists PUT', () => {
         .post("/api/v1/playlists")
         .send(body2);
 
-    expect(response.statusCode).toBe(400);
-    expect(response.body.error).toBe('Please enter a unique title');
+    expect(response.statusCode).toEqual(400);
+    expect(response.body.error).toEqual('Please enter a unique title');
   });
 
   it('user cannot update playlist without including title in body or request', async () => {
@@ -72,8 +68,8 @@ describe('test playlists PUT', () => {
     let response = await request(app)
       .put("/api/v1/playlists/1")
       .send(body);
-    expect(response.statusCode).toBe(400);
-    expect(response.body.error).toBe('You must include a title parameter in the request');
+    expect(response.statusCode).toEqual(400);
+    expect(response.body.error).toEqual('You must include a title parameter in the request');
   });
 
   it('user cannot update playlist with blank title in body or request', async () => {
@@ -83,8 +79,8 @@ describe('test playlists PUT', () => {
     let response = await request(app)
       .put("/api/v1/playlists/1")
       .send(body);
-    expect(response.statusCode).toBe(400);
-    expect(response.body.error).toBe('Title cannot be blank');
+    expect(response.statusCode).toEqual(400);
+    expect(response.body.error).toEqual('Title cannot be blank');
   });
 
   it('user cannot update playlist with blank title in body or request', async () => {
@@ -94,7 +90,7 @@ describe('test playlists PUT', () => {
     let response = await request(app)
       .put("/api/v1/playlists/100000")
       .send(body);
-    expect(response.statusCode).toBe(400);
-    expect(response.body.error).toBe('Please enter a valid id');
+    expect(response.statusCode).toEqual(400);
+    expect(response.body.error).toEqual('Please enter a valid id');
   });
 });
