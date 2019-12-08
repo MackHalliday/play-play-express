@@ -17,21 +17,35 @@ router.get('/', async function (request, response) {
    });
 });
 //
-// router.get('/:id', async function (request, response) {
-//   try {
-//     let favoriteId = await request.params.id
-//     let data = await favorites.findFavorite(favoriteId)
-//
-//     if (data.length != 0){
-//       return response.status(200).json(data);
-//     } else {
-//       return response.status(404).json({"error": "Record not found"});
-//     }
-//   }
-//   catch(error) {
-//     return response.status(500).json({ "error": "Unable to handle request" });
-//   }
-// });
+router.put('/:id', async function (request, response) {
+  let playlistId = await request.params.id
+  let title = await request.body.title
+
+  let object = await playlists.findPlaylist(playlistId)
+
+  if (object.length == 0) {
+    return response.status(400).json({"error": "Please enter a valid id"});
+  }
+
+  try {
+    if (!('title' in request.body)) {
+      return response.status(400).json({"error": "You must include a title parameter in the request"});
+    }
+    if (request.body.title === '') {
+      return response.status(400).json({"error": "Title cannot be blank"});
+    }
+    try {
+      let data = await playlists.updatePlaylist(playlistId, title)
+      return response.status(200).json(data)
+    }
+    catch(error) {
+      return response.status(400).json({"error": "Please enter a unique title"});
+    }
+  }
+  catch(error) {
+    return response.status(500).json({"error": "Request could not be handled"});
+  }
+});
 //
 router.delete('/:id', async function (request, response) {
 

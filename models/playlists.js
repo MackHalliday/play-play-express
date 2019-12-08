@@ -10,6 +10,13 @@ class Playlists {
     return database('playlists')
       .select();
   }
+
+  async updatePlaylist(id, new_title) {
+    return database('playlists')
+      .where('id', id)
+      .update({ title: new_title })
+      .returning(['id', 'title', 'created_at', 'updated_at']);
+  }
 //
   async findPlaylist(playlistId) {
     return database('playlists')
