@@ -197,6 +197,7 @@ Delete a single playlist from the database
 
 If successful, application will respond with 201 status.
 
+
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/dcb1f688a71d1e621483)
 
 
