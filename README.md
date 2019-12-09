@@ -165,7 +165,7 @@ If successful, application will respond with status code 200 and JSON with array
 ### Add a New Playlist
 Add a new playlist. A unique playlist title must be included in the POST request body.
 
-``` POST /api/v1/favorites ```
+``` POST /api/v1/playlists ```
 
 `title`: title of playlist
 
@@ -178,7 +178,7 @@ If successful, application will respond with 201 status and return JSON of newly
 ### Update a  Playlist
 Update a playlist. To update a playlist title, a unique playlist title must be included in the POST request body.
 
-``` PUT /api/v1/favorites ```
+``` PUT /api/v1/playlists/:id ```
 
 `title`: title of playlist
 
