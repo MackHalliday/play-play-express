@@ -19,6 +19,13 @@ exports.seed = function(knex) {
           {title: 'Top 100 Songs'}
         ])
         .then(() => console.log('Seeding complete!'))
+        .catch(error => console.log(`Error seeding data: ${error}`)),
+
+        knex('favorites_playlist').insert([
+          {favorites_id: 1, playlists_id: 1},
+          {favorites_id: 2, playlists_id: 3}
+        ])
+        .then(() => console.log('Seeding complete!'))
         .catch(error => console.log(`Error seeding data: ${error}`))
       ])
     })
