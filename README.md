@@ -184,8 +184,6 @@ Update a playlist. To update a playlist title, a unique playlist title must be i
 
 If successful, application will respond with 201 status and return JSON of newly posted playlist record.
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3dd64ac83f0e7412506e)
-
 
 
 ### Delete a Single Playlist
