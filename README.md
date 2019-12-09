@@ -150,6 +150,56 @@ If successful, application will respond with 201 status and return JSON of newly
 
 
 
+
+### Get All Playlists
+Returns all favorite tracks from the database 
+
+``` GET /api/v1/playlists ```
+
+If successful, application will respond with status code 200 and JSON with array of tracks.
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d23a9e30301997151b00)
+
+
+
+### Add a New Playlist
+Add a new playlist. A unique playlist title must be included in the POST request body.
+
+``` POST /api/v1/favorites ```
+
+`title`: title of playlist
+
+If successful, application will respond with 201 status and return JSON of newly posted playlist record.
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/af52ddc10e94fc7e9619)
+
+
+
+### Update a  Playlist
+Update a playlist. To update a playlist title, a unique playlist title must be included in the POST request body.
+
+``` PUT /api/v1/favorites ```
+
+`title`: title of playlist
+
+If successful, application will respond with 201 status and return JSON of newly posted playlist record.
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3dd64ac83f0e7412506e)
+
+
+
+### Delete a Single Playlist
+Delete a single playlist from the database
+
+``` DELETE /api/v1/playlists/:id ```
+
+`:id`: id of the track to be deleted
+
+If successful, application will respond with 201 status.
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/dcb1f688a71d1e621483)
+
+
  ## Schema Design
  
 
