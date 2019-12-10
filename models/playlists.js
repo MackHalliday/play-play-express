@@ -20,7 +20,8 @@ class Playlists {
 //
   async findPlaylist(playlistId) {
     return database('playlists')
-      .where('id', playlistId);
+      .where('id', playlistId)
+      .first();
   }
 //
   async deletePlaylist(playlistId) {
@@ -33,6 +34,15 @@ class Playlists {
                 title: title,
                 })
         .returning(['id', 'title', 'created_at', 'updated_at']);
+  }
+
+  async removeFavorite(playlistId, favoriteId){
+    return database('favorites_playlist')
+          .where({
+                'favorites_id': favoriteId,
+                'playlists_id': playlistId
+                })
+          .del()
   }
 }
 
