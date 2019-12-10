@@ -5,7 +5,6 @@ exports.up = function(knex) {
       table.increments().primary();
       table.integer('favorites_id').references('id').inTable('favorites');
       table.integer('playlists_id').references('id').inTable('playlists');
-
       table.timestamps(true, true);
     })
   ])
