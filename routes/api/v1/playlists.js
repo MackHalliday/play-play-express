@@ -54,7 +54,7 @@ router.delete('/:id', async function (request, response) {
     let data = await playlists.findPlaylist(playlistId)
 
     if (data.length != 0){
-      await playlists.deletePlaylist(data.id)
+      await playlists.deletePlaylist(data[0].id)
       return response.status(204).json(data);
     } else {
       return response.status(404).json({"error": "Record not found"});
