@@ -34,6 +34,15 @@ class Playlists {
                 })
         .returning(['id', 'title', 'created_at', 'updated_at']);
   }
+
+  async removeFavorite(playlistId, favoriteId){
+    return database('favorites_playlist')
+          .where({
+                'favorites_id': favoriteId,
+                'playlists_id': playlistId
+                })
+          .del()
+  }
 }
 
 module.exports = Playlists
