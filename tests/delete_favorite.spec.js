@@ -18,8 +18,8 @@ describe('test favorites path', () => {
     ]);
   });
 
-  afterEach(() => {
-    database.raw('truncate table favorites cascade');
+  afterEach(async () => {
+    await database.raw('truncate table favorites cascade');
   });
 
   describe('test favorite DELETE', () => {

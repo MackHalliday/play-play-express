@@ -18,8 +18,8 @@ describe('test playlists path', () => {
     ]);
   });
 
-  afterEach(() => {
-    database.raw('truncate table playlists cascade');
+  afterEach( async () => {
+    await database.raw('truncate table playlists cascade');
   });
 
   describe('test playlist DELETE', () => {

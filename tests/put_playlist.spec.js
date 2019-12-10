@@ -18,8 +18,8 @@ describe('test playlists PUT', () => {
     ]);
   });
 
-  afterEach(() => {
-    database.raw('truncate table playlists cascade');
+  afterEach(async () => {
+    await database.raw('truncate table playlists cascade');
   });
 
   it('user can update a playlist', async () => {

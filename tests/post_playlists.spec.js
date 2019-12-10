@@ -12,8 +12,8 @@ describe('test playlists POST', () => {
     await database.raw('truncate table playlists cascade');
   });
 
-  afterEach(() => {
-    database.raw('truncate table playlists cascade');
+  afterEach(async () => {
+    await database.raw('truncate table playlists cascade');
   });
   it('user can create a playlist', async () => {
     let body = {

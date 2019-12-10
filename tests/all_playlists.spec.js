@@ -16,11 +16,10 @@ describe('test playlists path', () => {
       {title: 'Jazz Playlist', id: 3},
       {title: 'EDM Playlist', id: 4}
     ]);
-    console.log(database('playlists').first())
   });
 
-  afterEach(() => {
-    database.raw('truncate table playlists cascade');
+  afterEach( async () => {
+    await database.raw('truncate table playlists cascade');
   });
 
   describe('test playlists GET', () => {
