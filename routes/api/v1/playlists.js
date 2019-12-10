@@ -94,6 +94,11 @@ router.post('/:playlist_id/favorites/:favorite_id', async function (request, res
   console.log(request.params)
   try {
     try {
+      let playlist_favorite = await database('favorites_playlist').where('favorites_id', request.params.favorite_id).where('playlists_id', request.params.playlist_id)
+      console.log(playlist_favorite)
+      if(playlist_favorite.length != []) {
+        return response.status(400).json({"error": "The song has already been added to the playlist"});
+      }
       let playlist = await playlists.findPlaylist(request.params.playlist_id)
       let favorite = await favorites.findFavorite(request.params.favorite_id)
       await playlists.addFavoriteToPlaylist(favorite[0].id, playlist[0].id)
