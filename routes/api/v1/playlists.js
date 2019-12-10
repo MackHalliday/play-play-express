@@ -4,6 +4,9 @@ var router = express.Router();
 const Playlists = require('../../../models/playlists.js');
 const playlists = new Playlists();
 
+const Favorites = require('../../../models/favorites.js');
+const favorites = new Favorites();
+
 // const FavoritesPresenter = require('../../../presenters/favorites_presenter.js');
 // const favoritesPresenter = new FavoritesPresenter();
 
@@ -92,15 +95,12 @@ router.post('/:playlist_id/favorites/:favorite_id', async function (request, res
   try {
     try {
       let playlist = await playlists.findPlaylist(request.params.playlist_id)
-      console.log(playlist)
       let favorite = await favorites.findFavorite(request.params.favorite_id)
-      database('favorites_playlist').insert({favorite_id: request.params.favorite_id, playlist_id: request.params.playlist_id})
-      return response.status(201).json("Success" )
-      // `${favorite.title} has been added to ${playlist.title}!`
+      await playlists.addFavoriteToPlaylist(favorite[0].id, playlist[0].id)
+      return response.status(201).json({"Success": `${favorite[0].title} has been added to ${playlist[0].title}!`})
     }
     catch(error) {
-      console.log('hits here?')
-      return response.status(400).json(error);
+      return response.status(400).json({"error": "Please enter a valid playlist and/or favorite id"});
     }
   }
   catch(error) {
