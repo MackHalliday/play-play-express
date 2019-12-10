@@ -35,9 +35,19 @@ class Playlists {
         .returning(['id', 'title', 'created_at', 'updated_at']);
   }
 
+
   async addFavoriteToPlaylist(favoriteId, playlistId) {
     return database('favorites_playlist').insert({favorites_id: favoriteId,
       playlists_id: playlistId});
+  }
+
+  async removeFavorite(playlistId, favoriteId){
+    return database('favorites_playlist')
+          .where({
+                'favorites_id': favoriteId,
+                'playlists_id': playlistId
+                })
+          .del()
   }
 }
 
