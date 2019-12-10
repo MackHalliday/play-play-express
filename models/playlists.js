@@ -43,6 +43,11 @@ class Playlists {
                 })
           .del()
   }
+
+  async addFavoriteToPlaylist(favoriteId, playlistId) {
+  return database('favorites_playlist').insert({favorites_id: favoriteId,
+    playlists_id: playlistId});
+}
 }
 
 module.exports = Playlists
