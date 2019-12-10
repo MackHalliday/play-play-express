@@ -7,6 +7,9 @@ const playlists = new Playlists();
 const Favorites = require('../../../models/favorites.js');
 const favorites = new Favorites();
 
+const PlaylistObject = require('../../../models/playlist_object.js');
+const playlistObject = new Favorites();
+
 
 router.get('/', async function (request, response) {
  playlists.allPlaylists()
@@ -101,6 +104,25 @@ router.post('/', async function (request, response) {
     return response.status(500).json({"error": "Request could not be handled"});
   }
 });
+
+router.get('/:id/favorites', async function (request, response) {
+  try {
+    try {
+      let playlist = await playlists.findPlaylist(request.params.id)
+      let playlistObject = new PlaylistObject(playlist)
+      console.log(playlistObject)
+      return response.status(201).json(playlistObject)
+    }
+    catch(error) {
+      return response.status(400).json({"error": "Please enter a unique playlist id"});
+    }
+  }
+  catch(error) {
+    return response.status(500).json({"error": "Request could not be handled"});
+  }
+});
+
+
 
 
 module.exports = router;
