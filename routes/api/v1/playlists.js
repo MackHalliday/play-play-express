@@ -48,7 +48,6 @@ router.put('/:id', async function (request, response) {
 });
 //
 router.delete('/:id', async function (request, response) {
-
   try {
     let playlistId = await request.params.id
     let data = await playlists.findPlaylist(playlistId)
@@ -67,7 +66,6 @@ router.delete('/:id', async function (request, response) {
 //
 
 router.delete('/:playlist_id/favorites/:favorite_id', async function (request, response) {
-
   try {
     let playlistId = await request.params.playlist_id
     let favoriteId = await request.params.favorite_id
@@ -85,7 +83,6 @@ router.delete('/:playlist_id/favorites/:favorite_id', async function (request, r
 
 router.post('/', async function (request, response) {
   try {
-
     if (!('title' in request.body)) {
       return response.status(400).json({"error": "You must include a title parameter in the request"});
     }
