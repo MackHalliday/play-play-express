@@ -20,8 +20,7 @@ class Playlists {
 //
   async findPlaylist(playlistId) {
     return database('playlists')
-      .where('id', playlistId)
-      .first();
+      .where('id', playlistId);
   }
 //
   async deletePlaylist(playlistId) {
