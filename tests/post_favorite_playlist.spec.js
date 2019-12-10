@@ -52,4 +52,17 @@ describe('test POST favorite to playlist', () => {
     expect(response.body).toEqual({"error": "Please enter a valid playlist and/or favorite id"});
 
   });
+
+  it('user cannot add a favorite to a playlist twice', async () => {
+    await request(app)
+      .post("/api/v1/playlists/2/favorites/2");
+
+    let response2 = await request(app)
+      .post("/api/v1/playlists/2/favorites/2");
+
+    expect(response2.statusCode).toBe(400);
+
+    expect(response2.body).toEqual({"error": "The song has already been added to the playlist"});
+
+  });
 });
