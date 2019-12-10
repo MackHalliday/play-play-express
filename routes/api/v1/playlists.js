@@ -102,5 +102,27 @@ router.post('/', async function (request, response) {
   }
 });
 
+router.post('/:playlist_id/favorites/:favorite_id', async function (request, response) {
+  console.log(request.params)
+  try {
+    try {
+      // let playlist_favorite = await database('favorites_playlist').where('favorites_id', request.params.favorite_id).where('playlists_id', request.params.playlist_id)
+      // if(playlist_favorite.length != []) {
+      //   return response.status(400).json({"error": "The song has already been added to the playlist"});
+      // }
+      let playlist = await playlists.findPlaylist(request.params.playlist_id)
+      let favorite = await favorites.findFavorite(request.params.favorite_id)
+      await playlists.addFavoriteToPlaylist(favorite[0].id, playlist[0].id)
+      return response.status(201).json({"Success": `${favorite[0].title} has been added to ${playlist[0].title}!`})
+    }
+    catch(error) {
+      return response.status(400).json({"error": "Please enter a valid playlist and/or favorite id"});
+    }
+  }
+  catch(error) {
+    return response.status(500).json({"error": "Request could not be handled"});
+  }
+});
+
 
 module.exports = router;
