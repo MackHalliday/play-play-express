@@ -58,7 +58,11 @@ class Playlists {
                    .where('playlists_id', playlistId)
                    .avg('rating')
                    .first()
-   return parseFloat(avgRating.avg)
+    if (avgRating.avg){
+      return parseFloat(avgRating.avg)
+    } else {
+      return 0
+    }
   }
 
   async getSongCountByPlaylist(playlistId){
