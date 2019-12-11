@@ -7,6 +7,9 @@ const playlists = new Playlists();
 const Favorites = require('../../../models/favorites.js');
 const favorites = new Favorites();
 
+const PlaylistsFavorites = require('../../../models/playlists_favorites.js')
+const playlistsFavorites = new PlaylistsFavorites();
+
 const PlaylistsPresenter = require('../../../presenters/playlists_presenter.js')
 const playlistsPresenter = new PlaylistsPresenter();
 
@@ -119,20 +122,17 @@ router.get('/:id/favorites', async function (request, response) {
 
 router.post('/:playlist_id/favorites/:favorite_id', async function (request, response) {
   try {
-    try {
-      let playlist_favorite = await database('favorites_playlist')
-      .where('favorites_id', request.params.favorite_id)
-      .where('playlists_id', request.params.playlist_id)
-
-      if(playlist_favorite.length != []) {
-        return response.status(400).json({"error": "The song has already been added to the playlist"});
-      }
-      let playlist = await playlists.findPlaylist(request.params.playlist_id)
-      let favorite = await favorites.findFavorite(request.params.favorite_id)
-      await playlists.addFavoriteToPlaylist(favorite[0].id, playlist[0].id)
-      return response.status(201).json({"Success": `${favorite[0].title} has been added to ${playlist[0].title}!`})
+    let favoriteId = await request.params.favorite_id
+    let playlistId = await request.params.playlist_id
+    let previouslyfavorited = await playlistsFavorites.allPlaylistsFavorites(favoriteId, playlistId)
+    if(previouslyfavorited.length != []) {
+      return response.status(400).json({"error": "The song has already been added to the playlist"});
     }
-    catch(error) {
+    let newFavorited = await playlistsPresenter.validPlaylistFavorite(favoriteId, playlistId)
+    if (newFavorited){
+      await playlists.addFavoriteToPlaylist(favoriteId, playlistId)
+      return response.status(201).json({"Success": `${newFavorited.favorite} has been added to ${newFavorited.playlist}!`})
+    } else {
       return response.status(400).json({"error": "Please enter a valid playlist and/or favorite id"});
     }
   }
