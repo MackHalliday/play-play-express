@@ -8,23 +8,27 @@ const Favorites = require('../../../models/favorites.js');
 const favorites = new Favorites();
 
 const PlaylistObject = require('../../../models/playlist_object.js');
-const playlistObject = new Favorites();
+// const playlistObject = new PlaylistObject();
+
+const PlaylistsPresenter = require('../../../presenters/playlists_presenter.js')
+const playlistsPresenter = new PlaylistsPresenter();
 
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('../../../knexfile')[environment];
 const database = require('knex')(configuration);
 
-
 router.get('/', async function (request, response) {
- playlists.allPlaylists()
-  .then((data) => {
-     response.status(200).json(data);
-   })
-   .catch((error) => {
-     return response.status(500).json({ error });
-   });
+  try {
+    let allPlaylists = await playlists.allPlaylists()
+    let data = await playlistsPresenter.createResponse(allPlaylists)
+    console.log(data)
+    return response.status(200).json(data);
+  }
+  catch(error) {
+    return response.status(500).json({"error": "Request could not be handled"});
+  }
 });
-//
+
 router.put('/:id', async function (request, response) {
   let playlistId = await request.params.id
   let title = await request.body.title
@@ -124,13 +128,14 @@ router.get('/:id/favorites', async function (request, response) {
   }
 });
 
+
 router.post('/:playlist_id/favorites/:favorite_id', async function (request, response) {
   try {
     try {
       let playlist_favorite = await database('favorites_playlist')
       .where('favorites_id', request.params.favorite_id)
       .where('playlists_id', request.params.playlist_id)
-      
+
       if(playlist_favorite.length != []) {
         return response.status(400).json({"error": "The song has already been added to the playlist"});
       }
