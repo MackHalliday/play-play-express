@@ -35,13 +35,38 @@ class Playlists {
         .returning(['id', 'title', 'created_at', 'updated_at']);
   }
 
-  async removeFavorite(playlistId, favoriteId){
+  async removeFavoriteFromPlaylist(playlistId, favoriteId){
     return database('favorites_playlist')
           .where({
                 'favorites_id': favoriteId,
                 'playlists_id': playlistId
                 })
           .del()
+  }
+
+  async getFavoritesByPlaylist(playlistId){
+    return database('favorites')
+          .join('favorites_playlist', 'favorites.id', '=', 'favorites_playlist.favorites_id')
+          .where('playlists_id', playlistId)
+          .columns('favorites_id as id','title', 'artistName', 'genre', 'rating')
+          .select()
+  }
+
+  async getSongAverageRating(playlistId){
+   let avgRating = await database('favorites')
+                   .join('favorites_playlist', 'favorites.id', '=', 'favorites_playlist.favorites_id')
+                   .where('playlists_id', playlistId)
+                   .avg('rating')
+                   .first()
+   return parseFloat(avgRating.avg)
+  }
+
+  async getSongCountByPlaylist(playlistId){
+    let favoritesCount = await database('favorites_playlist')
+                          .where('playlists_id', playlistId)
+                          .count('playlists_id')
+                          .first()
+    return parseFloat(favoritesCount.count)
   }
 }
 
