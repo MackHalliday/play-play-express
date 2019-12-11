@@ -20,17 +20,18 @@ class PlaylistObject {
     let favorites = await database('favorites')
     .join('favorites_playlist', 'favorites.id', '=', 'favorites_playlist.favorites_id')
     .where('playlists_id', playlist[0].id)
+    .columns('favorites_id as id','title', 'artistName', 'genre', 'rating')
     .select()
     return favorites
   }
 
   async getSongAverageRating(playlist){
-   let favorites = await database('favorites')
+   let avgRating = await database('favorites')
    .join('favorites_playlist', 'favorites.id', '=', 'favorites_playlist.favorites_id')
    .where('playlists_id', playlist[0].id)
    .avg('rating')
    .first()
-   return parseFloat(favorites.avg).toFixed(2)
+   return parseFloat(avgRating.avg).toFixed(2)
   }
 
   async getSongCount(playlist){
