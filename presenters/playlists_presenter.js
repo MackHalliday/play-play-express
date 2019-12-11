@@ -5,9 +5,13 @@ const database = require('knex')(configuration);
 const PlaylistObject = require('../models/playlist_object.js');
 
 class PlaylistsPresenter {
+
+  async createPlaylistObject(playlist){
+    return new PlaylistObject(playlist)
+  }
   async createResponse(allPlaylists){
     return await Promise.all(allPlaylists.map(async (playlist) => {
-       return new PlaylistObject(playlist)
+       return this.createPlaylistObject(playlist)
     }));
   }
 }
