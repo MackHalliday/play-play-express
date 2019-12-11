@@ -109,7 +109,7 @@ router.get('/:id/favorites', async function (request, response) {
   try {
     try {
       let playlist = await playlists.findPlaylist(request.params.id)
-      let playlistObject = new PlaylistObject(playlist)
+      let playlistObject = await new PlaylistObject(playlist)
       console.log(playlistObject)
       return response.status(201).json(playlistObject)
     }
