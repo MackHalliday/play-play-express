@@ -4,13 +4,13 @@ const playlists = new Playlists();
 class PlaylistObject {
   constructor(playlist) {
     return (async () => {
-      this.id = await playlist[0].id;
-      this.title= await playlist[0].title;
-      this.songCount = await playlists.getSongCountByPlaylist(playlist[0].id);
-      this.songAvgRating = await playlists.getSongAverageRating(playlist[0].id)
-      this.favorites = await playlists.getFavoritesByPlaylist(playlist[0].id)
-      this.updated_at= await playlist[0].updated_at;
-      this.created_at= await playlist[0].created_at;
+      this.id = await playlist.id;
+      this.title= await playlist.title;
+      this.songCount = await playlists.getSongCountByPlaylist(playlist.id);
+      this.songAvgRating = await playlists.getSongAverageRating(playlist.id)
+      this.favorites = await playlists.getFavoritesByPlaylist(playlist.id)
+      this.updated_at= await playlist.updated_at;
+      this.created_at= await playlist.created_at;
       return this;
     })();
   }
