@@ -148,7 +148,7 @@ Add a new favorite track. The track title must be included in the POST request b
 
 If successful, application will respond with 201 status and return JSON of newly posted record.
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a375cfdc39665aae1257)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/56f6770564916f782fbb)
 
 
 
