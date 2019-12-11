@@ -8,7 +8,6 @@ const Favorites = require('../../../models/favorites.js');
 const favorites = new Favorites();
 
 const PlaylistObject = require('../../../models/playlist_object.js');
-// const playlistObject = new PlaylistObject();
 
 const PlaylistsPresenter = require('../../../presenters/playlists_presenter.js')
 const playlistsPresenter = new PlaylistsPresenter();
@@ -21,7 +20,6 @@ router.get('/', async function (request, response) {
   try {
     let allPlaylists = await playlists.allPlaylists()
     let data = await playlistsPresenter.createResponse(allPlaylists)
-    console.log(data)
     return response.status(200).json(data);
   }
   catch(error) {
@@ -116,8 +114,8 @@ router.post('/', async function (request, response) {
 router.get('/:id/favorites', async function (request, response) {
   try {
     let playlist = await playlists.findPlaylist(request.params.id)
-    if (playlist.length === 1){
-      let playlistObject = await new PlaylistObject(playlist[0])
+    if (playlist.length > 0){
+      let playlistObject = await playlistsPresenter.createPlaylistObject(playlist[0])
       return response.status(201).json(playlistObject);
     } else {
       return response.status(400).json({"error": "Record could not be found"});
