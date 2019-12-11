@@ -21,7 +21,6 @@ router.get('/:id', async function (request, response) {
   try {
     let favoriteId = await request.params.id
     let data = await favorites.findFavorite(favoriteId)
-
     if (data.length != 0){
       return response.status(200).json(data);
     } else {
@@ -34,7 +33,6 @@ router.get('/:id', async function (request, response) {
 });
 
 router.delete('/:id', async function (request, response) {
-
   try {
     let favoriteId = await request.params.id
     let data = await favorites.findFavorite(favoriteId)
@@ -52,15 +50,15 @@ router.delete('/:id', async function (request, response) {
 
 router.post('/', async function (request, response) {
   try {
-    
+
     if (!('title' in request.body)) {
       return response.status(404).json({"error": "You must include a title parameter in the request"});
     }
     let data = await favoritesPresenter.newFavorite(request.body)
-    if (data == undefined) {
-      return response.status(400).json({"error": "Record not created. Song with that title could not be found"});
-    } else {
+    if (data) {
       return response.status(201).json(data);
+    } else {
+      return response.status(400).json({"error": "Record not created. Song with that title could not be found"});
     }
   }
   catch(error) {

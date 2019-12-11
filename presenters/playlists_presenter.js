@@ -21,7 +21,7 @@ class PlaylistsPresenter {
     }));
   }
 
-  async validPlaylistFavorite(favoriteId, playlistId){
+  async getPlaylistFavoriteTitle(favoriteId, playlistId){
     let favorite = await favorites.findFavorite(favoriteId)
     let playlist = await playlists.findPlaylist(playlistId)
     if (favorite[0] && playlist[0]){
