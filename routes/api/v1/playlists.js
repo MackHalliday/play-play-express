@@ -7,8 +7,6 @@ const playlists = new Playlists();
 const Favorites = require('../../../models/favorites.js');
 const favorites = new Favorites();
 
-const PlaylistObject = require('../../../models/playlist_object.js');
-
 const PlaylistsPresenter = require('../../../presenters/playlists_presenter.js')
 const playlistsPresenter = new PlaylistsPresenter();
 
@@ -30,32 +28,25 @@ router.get('/', async function (request, response) {
 router.put('/:id', async function (request, response) {
   let playlistId = await request.params.id
   let title = await request.body.title
-
-  let object = await playlists.findPlaylist(playlistId)
-
-  if (object.length == 0) {
-    return response.status(400).json({"error": "Please enter a valid id"});
-  }
+  let playlist = await playlists.findPlaylist(playlistId)
   try {
+    if (playlist.length == 0) {
+      return response.status(400).json({"error": "Please enter a valid id"});
+    }
     if (!('title' in request.body)) {
       return response.status(400).json({"error": "You must include a title parameter in the request"});
     }
     if (request.body.title === '') {
       return response.status(400).json({"error": "Title cannot be blank"});
     }
-    try {
-      let data = await playlists.updatePlaylist(playlistId, title)
-      return response.status(200).json(data)
-    }
-    catch(error) {
-      return response.status(400).json({"error": "Please enter a unique title"});
-    }
+    let data = await playlists.updatePlaylist(playlistId, title)
+    return response.status(200).json(data)
   }
   catch(error) {
     return response.status(500).json({"error": "Request could not be handled"});
   }
 });
-//
+
 router.delete('/:id', async function (request, response) {
   try {
     let playlistId = await request.params.id
@@ -72,7 +63,6 @@ router.delete('/:id', async function (request, response) {
     return response.status(500).json({"error": "Request could not be handled"});
   }
 });
-//
 
 router.delete('/:playlist_id/favorites/:favorite_id', async function (request, response) {
   try {
