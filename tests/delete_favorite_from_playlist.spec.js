@@ -48,11 +48,19 @@ describe('test playlist path', () => {
       expect(await database('favorites_playlist').where('id', 1).select()).toEqual([]);
     });
 
-    it('sad path', async () => {
+    it('sad path must have a valid id', async () => {
       const response = await request(app)
         .delete("/api/v1/playlists/1/favorites/10000");
 
       expect(response.statusCode).toBe(404);
+    });
+
+    it('sad path server error', async () => {
+      const response = await request(app)
+        .delete("/api/v1/playlists/chicken/favorites/10000");
+
+      expect(response.statusCode).toBe(500);
+      expect(response.body).toEqual({"error": "Request could not be handled"});
     });
   });
 });
