@@ -201,6 +201,8 @@ If successful, application will respond with 201 status.
 
  ## Schema Design
  
+ ![image](https://user-images.githubusercontent.com/49769068/70656381-3b200080-1c17-11ea-8b36-f2b61aea751f.png)
+ 
 
  ## Tech Stack List
    *  [Node.js](https://nodejs.org/en/)
