@@ -28,10 +28,10 @@ describe('test GET playlist with favorites path', () => {
 
     await database('favorites_playlist').insert([
       {id: 1, favorites_id: 1, playlists_id: 1},
-      {id: 1, favorites_id: 2, playlists_id: 1},
-      {id: 1, favorites_id: 3, playlists_id: 1},
-      {id: 2, favorites_id: 2, playlists_id: 2},
-      {id: 3, favorites_id: 3, playlists_id: 3},
+      {id: 2, favorites_id: 2, playlists_id: 1},
+      {id: 3, favorites_id: 3, playlists_id: 1},
+      {id: 4, favorites_id: 2, playlists_id: 2},
+      {id: 5, favorites_id: 3, playlists_id: 3},
     ]);
   });
 
@@ -47,30 +47,27 @@ describe('test GET playlist with favorites path', () => {
         .get("/api/v1/playlists/1/favorites");
 
       expect(response.statusCode).toBe(201);
-      expect(response.body.length).toBe(1);
-
-      expect(response.body[0]).toHaveProperty('id');
-      expect(response.body[0]).toHaveProperty('title');
-      expect(response.body[0]).toHaveProperty('songCount');
-      expect(response.body[0]).toHaveProperty('songAvgRating');
-      expect(response.body[0]).toHaveProperty('favorites');
-      expect(response.body[0]).toHaveProperty('updated_at');
-      expect(response.body[0]).toHaveProperty('created_at');
-
-      expect(response.body[0].title).toBe('Playlist 1');
-      expect(response.body[0].songCount).toBe(4);
-      expect(response.body[0].songAvgRating).toBe(80);
-      expect(response.body[0].favorites.length).toBe(4);
-      expect(response.body[0].favorites[0].title).toBe("Track 2");
-      expect(response.body[0].favorites[0].artistName).toBe("Artist");
-      expect(response.body[0].favorites[0].rating).toBe(100);
+      expect(response.body["id"]).toBe(1);
+      expect(response.body["favorites"].length).toBe(3);
+      expect(response.body["songAvgRating"]).toBe(80);
+      expect(response.body["songCount"]).toBe(3);
+      expect(response.body["title"]).toBe("Playlist 1");
     });
 
-    // it('sad path', async () => {
-    //   const response = await request(app)
-    //     .delete("/api/v1/playlists/1/favorites/10000");
-    //
-    //   expect(response.statusCode).toBe(404);
-    // });
+    it('sad path cannot return playlist that does not have valid id', async () => {
+      const response = await request(app)
+        .get("/api/v1/playlists/100/favorites");
+
+      expect(response.statusCode).toBe(400);
+      expect(response.body).toEqual({"error": "Record could not be found"});
+    });
+
+    it('sad path server error', async () => {
+      const response = await request(app)
+        .get("/api/v1/playlists/chicken/favorites");
+
+      expect(response.statusCode).toBe(500);
+      expect(response.body).toEqual({"error": "Request could not be handled"});
+    });
   });
 });
