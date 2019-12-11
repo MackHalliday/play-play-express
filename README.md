@@ -35,7 +35,7 @@ The easiest way to get started is to run the following command. This will pull d
 #### Set up your local database
 You’ll need to figure out a name for your database. We suggest calling it something like `play_play_express_dev`.  
 
-You will also need to update the knexfile with the database name 
+You will also need to update the development section of the knexfile with the database name.
 
 To get things set up, you’ll need to access your Postgres instance by typing in `psql` into your terminal. Once there, you can create your database by running the comment `CREATE DATABASE PUT_DATABASE_NAME_HERE_dev;`.
 
@@ -80,6 +80,9 @@ CREATE DATABASE DATABASE_NAME_test;
 
 knex migrate:latest --env test
 ```
+
+You will also need to update the test section of the knexfile with the test database name.
+
 
  ## How to Run Tests
 
