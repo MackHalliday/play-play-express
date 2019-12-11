@@ -87,7 +87,7 @@ knex migrate:latest --env test
 
  ## How to Use
 
- Recommend using [Postman](https://www.getpostman.com/) to hit endpoints.
+ We recommend using [Postman](https://www.getpostman.com/) to hit endpoints.
 
  ## Endpoints
 
@@ -134,6 +134,8 @@ Delete a single favorite track from the database
 
 If successful, application will respond with 201 status.
 
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fa9117dc5f4dbabf8704)
+
 
 
 ### Add a New Single Favorite Track
@@ -162,7 +164,7 @@ If successful, application will respond with status code 200 and JSON with array
 
 
 
-### Add a New Playlist
+### Add a New Single Playlist
 Add a new playlist. A unique playlist title must be included in the POST request body.
 
 ``` POST /api/v1/playlists ```
@@ -175,7 +177,7 @@ If successful, application will respond with 201 status and return JSON of newly
 
 
 
-### Update a  Playlist
+### Update a Single Playlist
 Update a playlist. To update a playlist title, a unique playlist title must be included in the POST request body.
 
 ``` PUT /api/v1/playlists/:id ```
@@ -199,7 +201,7 @@ If successful, application will respond with 201 status.
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/dcb1f688a71d1e621483)
 
 
-### Get a Playlist with Favorites
+### Get a Single Playlist with Favorites
 Returns a playlist with it associated favorite tracks from the database 
 
 ``` GET /api/v1/playlists/:id/favorites ```
@@ -211,7 +213,7 @@ If successful, application will respond with status code 200 and JSON of request
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8152c6e9e4633084ed49)
 
 
-### Add a Favorite to a Playlist
+### Add a Single Favorite to a Playlist
 Add a favorite track to a playlist. A playlist id and favorite id must be included in the POST request URI.
 
 ``` POST /api/v1/playlists/:playlist_id/favorites/:favorite_id ```
@@ -224,7 +226,7 @@ If successful, application will respond with 201 status and return JSON of newly
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/914f0c5409a75578543a)
 
 
-### Delete a Favorite from a Playlist
+### Delete a Single Favorite from a Playlist
 Delete a favorite track from a playlist. A playlist id and favorite id must be included in the DELETE request URI.
 
 ``` DELETE /api/v1/playlists/:playlist_id/favroites/:favorite_id ```
