@@ -72,7 +72,7 @@ router.delete('/:playlist_id/favorites/:favorite_id', async function (request, r
   try {
     let playlistId = await request.params.playlist_id
     let favoriteId = await request.params.favorite_id
-    let data = await playlists.removeFavorite(playlistId, favoriteId);
+    let data = await playlists.removeFavoriteFromPlaylist(playlistId, favoriteId);
     if (data){
       return response.status(204).json(data);
     } else{
