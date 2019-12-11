@@ -107,22 +107,17 @@ router.post('/', async function (request, response) {
 
 router.get('/:id/favorites', async function (request, response) {
   try {
-    try {
-      let playlist = await playlists.findPlaylist(request.params.id)
-      let playlistObject = await new PlaylistObject(playlist)
-      console.log(playlistObject)
-      return response.status(201).json(playlistObject)
-    }
-    catch(error) {
-      return response.status(400).json({"error": "Please enter a unique playlist id"});
+    let playlist = await playlists.findPlaylist(request.params.id)
+    if (playlist){
+      let playlistObject = await new PlaylistObject(playlist[0])
+      return response.status(201).json(playlistObject);
+    } else {
+      return response.status(400).json({"error": "Record could not be found"});
     }
   }
   catch(error) {
     return response.status(500).json({"error": "Request could not be handled"});
   }
 });
-
-
-
 
 module.exports = router;
