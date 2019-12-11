@@ -184,7 +184,7 @@ Update a playlist. To update a playlist title, a unique playlist title must be i
 
 If successful, application will respond with 201 status and return JSON of newly posted playlist record.
 
-
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c0adccab586a6598cc16)
 
 ### Delete a Single Playlist
 Delete a single playlist from the database
@@ -197,6 +197,45 @@ If successful, application will respond with 201 status.
 
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/dcb1f688a71d1e621483)
+
+
+### Get a Playlist with Favorites
+Returns a playlist with it associated favorite tracks from the database 
+
+``` GET /api/v1/playlists/:id/favorites ```
+
+`:id`: id of desired favorite track
+
+If successful, application will respond with status code 200 and JSON of requested track.
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8152c6e9e4633084ed49)
+
+
+### Add a Favorite to a Playlist
+Add a favorite track to a playlist. A playlist id and favorite id must be included in the POST request URI.
+
+``` POST /api/v1/playlists/:playlist_id/favorites/:favorite_id ```
+
+`playlist_id`: id of playlist
+`favorite_id`: id of favorite
+
+If successful, application will respond with 201 status and return JSON of newly posted playlist record.
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/914f0c5409a75578543a)
+
+
+### Delete a Favorite from a Playlist
+Delete a favorite track from a playlist. A playlist id and favorite id must be included in the DELETE request URI.
+
+``` DELETE /api/v1/playlists/:playlist_id/favroites/:favorite_id ```
+
+`playlist_id`: id of playlist
+`favorite_id`: id of favorite
+
+If successful, application will respond with 201 status.
+
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7ef14c64d26b7f927dad)
 
 
  ## Schema Design
