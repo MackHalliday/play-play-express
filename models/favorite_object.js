@@ -1,4 +1,4 @@
-class Track {
+class FavoriteObject {
   constructor(newTrack){
     this.title = newTrack.track.track_name
     this.artistName = newTrack.track.artist_name
@@ -15,4 +15,4 @@ class Track {
   }
 }
 
-module.exports = Track
+module.exports = FavoriteObject

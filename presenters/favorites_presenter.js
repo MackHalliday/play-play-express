@@ -8,8 +8,7 @@ const musixMatchService = new MusixMatchService();
 const Favorites = require('../models/favorites.js');
 const favorites = new Favorites();
 
-const Track = require('../models/track.js');
-
+const FavoriteObject = require('../models/favorite_object.js');
 
 class FavoritesPresenter {
 
@@ -23,7 +22,7 @@ class FavoritesPresenter {
     if (newTrack === undefined){
       return undefined
     } else {
-      let trackObject = new Track(newTrack)
+      let trackObject = new FavoriteObject(newTrack)
       return favorites.createFavorite(trackObject);
     }
   }
