@@ -31,17 +31,6 @@ exports.seed = function(knex) {
           {id: 8, title: 'Playlist 4 Test'}
         ])
         .then(() => console.log('Seeding complete!'))
-        .catch(error => console.log(`Error seeding data: ${error}`)),
-
-        knex('favorites_playlist').insert([
-          {id: 1, favorites_id: 1, playlists_id: 1},
-          {id: 2, favorites_id: 2, playlists_id: 3},
-          {id: 3, favorites_id: 6, playlists_id: 5},
-          {id: 4, favorites_id: 7, playlists_id: 7},
-          {id: 5, favorites_id: 8, playlists_id: 8},
-          {id: 6, favorites_id: 7, playlists_id: 8},
-        ])
-        .then(() => console.log('Seeding complete!'))
         .catch(error => console.log(`Error seeding data: ${error}`))
       ])
     })
