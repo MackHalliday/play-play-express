@@ -7,6 +7,9 @@ const playlists = new Playlists();
 const Favorites = require('../../../models/favorites.js');
 const favorites = new Favorites();
 
+const PlaylistObject = require('../../../models/playlist_object.js');
+const playlistObject = new Favorites();
+
 
 router.get('/', async function (request, response) {
  playlists.allPlaylists()
@@ -69,7 +72,7 @@ router.delete('/:playlist_id/favorites/:favorite_id', async function (request, r
   try {
     let playlistId = await request.params.playlist_id
     let favoriteId = await request.params.favorite_id
-    let data = await playlists.removeFavorite(playlistId, favoriteId);
+    let data = await playlists.removeFavoriteFromPlaylist(playlistId, favoriteId);
     if (data){
       return response.status(204).json(data);
     } else{
@@ -102,5 +105,19 @@ router.post('/', async function (request, response) {
   }
 });
 
+router.get('/:id/favorites', async function (request, response) {
+  try {
+    let playlist = await playlists.findPlaylist(request.params.id)
+    if (playlist.length === 1){
+      let playlistObject = await new PlaylistObject(playlist[0])
+      return response.status(201).json(playlistObject);
+    } else {
+      return response.status(400).json({"error": "Record could not be found"});
+    }
+  }
+  catch(error) {
+    return response.status(500).json({"error": "Request could not be handled"});
+  }
+});
 
 module.exports = router;
