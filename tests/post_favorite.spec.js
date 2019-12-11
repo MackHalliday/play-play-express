@@ -18,11 +18,15 @@ describe('test favorites POST', () => {
   //   ]);
   // })
   //
-  // afterEach(() => {
-  //   database.raw('truncate table favorites cascade');
-  // })
+  beforeEach(async () => {
+    await database.raw('truncate table playlists cascade');
+  });
 
-  it('happy path', async () => {
+  afterEach(async () => {
+    await database.raw('truncate table playlists cascade');
+  });
+
+  it('happy path adding a favorite', async () => {
     const body = {
       title: "Coming of Age"
     };
@@ -47,7 +51,7 @@ describe('test favorites POST', () => {
 
   });
 
-  it('happy path with artist', async () => {
+  it('happy path adding a favorite with artist and title in body of request', async () => {
     const body = {
       title: "White Christmas",
       artist: "Bing Crosby"
@@ -73,7 +77,7 @@ describe('test favorites POST', () => {
     expect(lastRecord.genre).toBe('Holiday');
 
   })
-  it('sad path song not found', async () => {
+  it('sad path song title cannot be found', async () => {
     const body = {
       title: "asjdfioasjfoaj"
     };
