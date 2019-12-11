@@ -17,16 +17,16 @@ class Playlists {
       .update({ title: new_title })
       .returning(['id', 'title', 'created_at', 'updated_at']);
   }
-//
+
   async findPlaylist(playlistId) {
     return database('playlists')
       .where('id', playlistId);
   }
-//
+
   async deletePlaylist(playlistId) {
     return database('playlists').where('id', playlistId).del()
   }
-//
+
   async createPlaylist(title){
    return database('playlists')
         .insert({
@@ -74,8 +74,9 @@ class Playlists {
   }
 
   async addFavoriteToPlaylist(favoriteId, playlistId) {
-    return database('favorites_playlist').insert({favorites_id: favoriteId,
-      playlists_id: playlistId});
+    return database('favorites_playlist')
+          .insert({favorites_id: favoriteId, playlists_id: playlistId})
+          .returning(['id', 'playlists_id', 'favorites_id']);
   }
 
 }
