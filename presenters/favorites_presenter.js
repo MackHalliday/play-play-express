@@ -1,7 +1,3 @@
-const environment = process.env.NODE_ENV || 'development';
-const configuration = require('../knexfile')[environment];
-const database = require('knex')(configuration);
-
 const MusixMatchService= require('../services/musix_match_service.js');
 const musixMatchService = new MusixMatchService();
 
