@@ -7,7 +7,7 @@ class FavoriteObject {
   }
 
   getGenre(musicGenreList) {
-    if (musicGenreList.length != 0){
+    if (musicGenreList.length > 0){
       return musicGenreList[0].music_genre.music_genre_name
     } else {
       return "unknown"
