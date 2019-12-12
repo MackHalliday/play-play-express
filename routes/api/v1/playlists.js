@@ -64,8 +64,6 @@ router.post('/', async function (request, response) {
   }
 });
 
-
-
 router.post('/:playlist_id/favorites/:favorite_id', async function (request, response) {
   try {
     let favoriteId = await request.params.favorite_id
@@ -86,7 +84,6 @@ router.post('/:playlist_id/favorites/:favorite_id', async function (request, res
     return response.status(500).json({"error": "Request could not be handled"});
   }
 });
-
 
 router.put('/:id', async function (request, response) {
   let playlistId = await request.params.id
