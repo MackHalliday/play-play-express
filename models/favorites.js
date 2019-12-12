@@ -19,18 +19,20 @@ class Favorites {
   }
 
   async deleteFavorite(songID) {
-    return database('favorites').where('id', songID).del()
+    return database('favorites')
+      .where('id', songID)
+      .del()
   }
 
   async createFavorite(trackObject){
    return database('favorites')
-        .insert({
+      .insert({
                 title: trackObject.title,
                 artistName: trackObject.artistName,
                 genre: trackObject.genre,
                 rating: trackObject.rating
-                })
-        .returning(['id', 'title', 'artistName', 'genre', 'rating']);
+              })
+      .returning(['id', 'title', 'artistName', 'genre', 'rating']);
   }
 }
 

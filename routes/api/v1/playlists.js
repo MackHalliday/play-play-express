@@ -31,7 +31,7 @@ router.get('/', async function (request, response) {
 router.get('/:id/favorites', async function (request, response) {
   try {
     let playlist = await playlists.findPlaylist(request.params.id)
-    if (playlist.length > 0){
+    if (playlist[0]){
       let playlistObject = await playlistsPresenter.createPlaylistObject(playlist[0])
       return response.status(201).json(playlistObject);
     } else {
@@ -64,8 +64,6 @@ router.post('/', async function (request, response) {
   }
 });
 
-
-
 router.post('/:playlist_id/favorites/:favorite_id', async function (request, response) {
   try {
     let favoriteId = await request.params.favorite_id
@@ -86,7 +84,6 @@ router.post('/:playlist_id/favorites/:favorite_id', async function (request, res
     return response.status(500).json({"error": "Request could not be handled"});
   }
 });
-
 
 router.put('/:id', async function (request, response) {
   let playlistId = await request.params.id
@@ -114,7 +111,7 @@ router.delete('/:id', async function (request, response) {
   try {
     let playlistId = await request.params.id
     let data = await playlists.findPlaylist(playlistId)
-    if (data.length != 0){
+    if (data[0]){
       await playlists.deletePlaylist(data[0].id)
       return response.status(204).json(data);
     } else {

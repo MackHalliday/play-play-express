@@ -24,7 +24,9 @@ class Playlists {
   }
 
   async deletePlaylist(playlistId) {
-    return database('playlists').where('id', playlistId).del()
+    return database('playlists')
+      .where('id', playlistId)
+      .del()
   }
 
   async createPlaylist(title){
@@ -37,11 +39,11 @@ class Playlists {
 
   async removeFavoriteFromPlaylist(playlistId, favoriteId){
     return database('favorites_playlist')
-          .where({
-                'favorites_id': favoriteId,
-                'playlists_id': playlistId
-                })
-          .del()
+      .where({
+              'favorites_id': favoriteId,
+              'playlists_id': playlistId
+            })
+      .del()
   }
 
   async getFavoritesByPlaylist(playlistId){
@@ -75,8 +77,8 @@ class Playlists {
 
   async addFavoriteToPlaylist(favoriteId, playlistId) {
     return database('favorites_playlist')
-          .insert({favorites_id: favoriteId, playlists_id: playlistId})
-          .returning(['id', 'playlists_id', 'favorites_id']);
+        .insert({favorites_id: favoriteId, playlists_id: playlistId})
+        .returning(['id', 'playlists_id', 'favorites_id']);
   }
 
 }

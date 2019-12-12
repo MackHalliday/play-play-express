@@ -1,7 +1,3 @@
-const environment = process.env.NODE_ENV || 'development';
-const configuration = require('../knexfile')[environment];
-const database = require('knex')(configuration);
-
 const MusixMatchService= require('../services/musix_match_service.js');
 const musixMatchService = new MusixMatchService();
 
@@ -19,11 +15,11 @@ class FavoritesPresenter {
   async newFavorite(body) {
     let matchedTracks = await musixMatchService.getTrackSearch(body.title, body.artist);
     let newTrack = await this.firstTrack(matchedTracks);
-    if (newTrack === undefined){
-      return undefined
-    } else {
+    if (newTrack){
       let trackObject = new FavoriteObject(newTrack)
       return favorites.createFavorite(trackObject);
+    } else {
+      return undefined
     }
   }
 }
