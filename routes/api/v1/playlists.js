@@ -31,7 +31,7 @@ router.get('/', async function (request, response) {
 router.get('/:id/favorites', async function (request, response) {
   try {
     let playlist = await playlists.findPlaylist(request.params.id)
-    if (playlist.length > 0){
+    if (playlist[0]){
       let playlistObject = await playlistsPresenter.createPlaylistObject(playlist[0])
       return response.status(201).json(playlistObject);
     } else {
