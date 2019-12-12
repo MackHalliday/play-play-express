@@ -21,7 +21,7 @@ router.get('/:id', async function (request, response) {
   try {
     let favoriteId = await request.params.id
     let data = await favorites.findFavorite(favoriteId)
-    if (data.length != 0){
+    if (data[0]){
       return response.status(200).json(data);
     } else {
       return response.status(404).json({"error": "Record not found"});
@@ -55,7 +55,7 @@ router.delete('/:id', async function (request, response) {
   try {
     let favoriteId = await request.params.id
     let data = await favorites.findFavorite(favoriteId)
-    if (data.length != 0){
+    if (data[0]){
       await favorites.deleteFavorite(data[0].id)
       return response.status(204).json(data);
     } else {
