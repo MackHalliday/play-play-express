@@ -114,7 +114,7 @@ router.delete('/:id', async function (request, response) {
   try {
     let playlistId = await request.params.id
     let data = await playlists.findPlaylist(playlistId)
-    if (data.length != 0){
+    if (data[0]){
       await playlists.deletePlaylist(data[0].id)
       return response.status(204).json(data);
     } else {
