@@ -115,6 +115,27 @@ If successful, application will respond with status code 200 and JSON with array
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/6606e9d1f575ad52eb26)
 
+**Sample Successful Response:**
+
+```
+[
+    {
+        "id": 1,
+        "title": "Bailamos",
+        "artistName": "Enrique Iglesias",
+        "genre": "Pop",
+        "rating": 88
+    },
+    {
+        "id": 2,
+        "title": "The Chain",
+        "artistName": "Fleetwood Mac",
+        "genre": "Rock",
+        "rating": 52
+    }
+]
+```
+
 
 
 ### Get a Single Favorite Track
@@ -127,6 +148,20 @@ Returns a single favorite track from the database
 If successful, application will respond with status code 200 and JSON of requested track.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a375cfdc39665aae1257)
+
+**Sample Successful Response:**
+
+```
+[
+    {
+        "id": 2,
+        "title": "The Chain",
+        "artistName": "Fleetwood Mac",
+        "genre": "Rock",
+        "rating": 52
+    }
+]
+```
 
 
 
@@ -151,21 +186,67 @@ Add a new favorite track. The track title must be included in the POST request b
 `title`: title of the desired track
 `artist`: (optional) artist of the desired track
 
-If successful, application will respond with 201 status and return JSON of newly posted record.
+If successful, application will respond with 201 status and return JSON of newly posted favorite track.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/56f6770564916f782fbb)
 
+**Sample Successful Response:**
+
+```
+[
+    {
+        "id": 19,
+        "title": "Stronger",
+        "artistName": "Kelly Clarkson",
+        "genre": "Electronic",
+        "rating": 30
+    }
+]
+```
 
 
 
 ### Get All Playlists
-Returns all favorite tracks from the database 
+Returns all playlists from the database 
 
 ``` GET /api/v1/playlists ```
 
-If successful, application will respond with status code 200 and JSON with array of tracks.
+If successful, application will respond with status code 200 and JSON with array of playlists.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d23a9e30301997151b00)
+
+**Sample Successful Response:**
+
+```
+[
+    {
+        "id": 1,
+        "title": "90s Guilty Pleasure",
+        "songCount": 1,
+        "songAvgRating": 88,
+        "favorites": [
+            {
+                "id": 1,
+                "title": "Bailamos",
+                "artistName": "Enrique Iglesias",
+                "genre": "Pop",
+                "rating": 88
+            }
+        ],
+        "updated_at": "2019-12-11T19:40:01.088Z",
+        "created_at": "2019-12-11T19:40:01.088Z"
+    },
+    {
+        "id": 2,
+        "title": "Party Mix",
+        "songCount": 0,
+        "songAvgRating": 0,
+        "favorites": [],
+        "updated_at": "2019-12-11T19:40:01.088Z",
+        "created_at": "2019-12-11T19:40:01.088Z"
+    }
+]
+```
 
 
 
@@ -180,6 +261,19 @@ If successful, application will respond with 201 status and return JSON of newly
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/af52ddc10e94fc7e9619)
 
+**Sample Successful Response:**
+
+```
+[
+    {
+        "id": 17,
+        "title": "Electronic Dance Music Playlist",
+        "created_at": "2019-12-12T21:42:11.346Z",
+        "updated_at": "2019-12-12T21:42:11.346Z"
+    }
+]
+```
+
 
 
 ### Update a Single Playlist
@@ -189,9 +283,22 @@ Update a playlist. To update a playlist title, a unique playlist title must be i
 
 `title`: title of playlist
 
-If successful, application will respond with 201 status and return JSON of newly posted playlist record.
+If successful, application will respond with 201 status and return JSON of newly updated playlist record.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c0adccab586a6598cc16)
+
+**Sample Successful Response:**
+
+```
+[
+    {
+        "id": 2,
+        "title": "Classical Playlist",
+        "created_at": "2019-12-11T19:40:01.088Z",
+        "updated_at": "2019-12-11T19:40:01.088Z"
+    }
+]
+```
 
 ### Delete a Single Playlist
 Delete a single playlist from the database
@@ -213,9 +320,31 @@ Returns a playlist with it associated favorite tracks from the database
 
 `:id`: id of desired favorite track
 
-If successful, application will respond with status code 200 and JSON of requested track.
+If successful, application will respond with status code 200 and JSON of requested playlists with associated favorite tracks.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8152c6e9e4633084ed49)
+
+**Sample Successful Response:**
+
+```
+{
+    "id": 1,
+    "title": "90s Guilty Pleasure",
+    "songCount": 1,
+    "songAvgRating": 88,
+    "favorites": [
+        {
+            "id": 1,
+            "title": "Bailamos",
+            "artistName": "Enrique Iglesias",
+            "genre": "Pop",
+            "rating": 88
+        }
+    ],
+    "updated_at": "2019-12-11T19:40:01.088Z",
+    "created_at": "2019-12-11T19:40:01.088Z"
+}
+```
 
 
 ### Add a Single Favorite to a Playlist
@@ -226,9 +355,17 @@ Add a favorite track to a playlist. A playlist id and favorite id must be includ
 `playlist_id`: id of playlist
 `favorite_id`: id of favorite
 
-If successful, application will respond with 201 status and return JSON of newly posted playlist record.
+If successful, application will respond with 201 status and return message indicating that the favorite track has been added to the playlist.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/914f0c5409a75578543a)
+
+**Sample Successful Response:**
+
+```
+{
+    "Success": "Bailamos has been added to 90s Guilty Pleasure!"
+}
+```
 
 
 ### Delete a Single Favorite from a Playlist
