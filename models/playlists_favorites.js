@@ -8,8 +8,8 @@ class PlaylistsFavorites {
 
   async allPlaylistsFavorites(favoriteId, playlistId) {
     return database('favorites_playlist')
-    .where('favorites_id', favoriteId)
-    .where('playlists_id', playlistId)
+      .where('favorites_id', favoriteId)
+      .where('playlists_id', playlistId)
   }
 }
 
