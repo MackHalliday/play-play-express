@@ -15,11 +15,11 @@ class FavoritesPresenter {
   async newFavorite(body) {
     let matchedTracks = await musixMatchService.getTrackSearch(body.title, body.artist);
     let newTrack = await this.firstTrack(matchedTracks);
-    if (newTrack === undefined){
-      return undefined
-    } else {
+    if (newTrack){
       let trackObject = new FavoriteObject(newTrack)
       return favorites.createFavorite(trackObject);
+    } else {
+      return undefined
     }
   }
 }
